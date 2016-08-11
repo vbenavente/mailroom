@@ -2,5 +2,4 @@
 import pytest
 
 
-def test_compose_email():
-    from mailroom import interface
+ 

@@ -20,7 +20,7 @@ report ")
         interface()
 
 
-def get_name():
+def get_name(name):
     name = input(u"Enter a donor\'s full name or to see a list of donors enter \
 the word 'list'")
     name = name.lower()

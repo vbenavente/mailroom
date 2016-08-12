@@ -47,5 +47,54 @@ def compose_email(name, donation):
           .format(name, donation))
     interface()
 
+def create_report():
+    report_list = []
+    for i in range(0, len(report_names())):
+        person = []
+        names = report_names()
+        totals = report_totals()
+        num_donations = report_num_donations()
+        average = report_average(report_totals(), report_num_donations())
+        person.extend((names[i], totals[i], num_donations[i], average[i]))
+        report_list.append(person)
+    report_list.sort(key=lambda x: x[1])
+    report_list.reverse()
+    print(report_list)
+    interface()
 
-# interface()
+
+
+
+def report_names():
+    list_names = []
+    for key in DONORS:
+        list_names.append(key)
+    return list_names
+
+
+def report_totals():
+    total_donated = []
+    for i in DONORS:
+        totals = (sum(DONORS[i]))
+        total_donated.append(totals)
+    return total_donated
+
+
+def report_num_donations():
+    num_donations = []
+    for i in DONORS:
+        num = len(DONORS[i])
+        num_donations.append(num)
+    return num_donations
+
+
+def report_average(total_donated, num_donations):
+    report_average = []
+    for i in range(0, len(total_donated)):
+        average = total_donated[i] / num_donations[i]
+        report_average.append(average)
+    return report_average
+
+
+if __name__ == '__main__':
+    interface()

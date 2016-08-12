@@ -13,7 +13,8 @@ def interface():
         print(u"Please enter 1 or 2")
         response = input(u"Press 1 to send a thank you note\nPress 2 to create a report ")
     if response == '1':
-        name = input(u"Enter a donor\'s full name or enter the word 'list' to see a list of donors ")
+        name = input(u"Enter a donor\'s full name or enter the word 'list' to "
+                     u"see a list of donors ")
         name = name.lower()
         while name == "list":
             for key in DONORS:
@@ -38,7 +39,7 @@ def handle_name(name, donation, DONORS):
 
 
 def handle_donation(name, donation, DONORS):
-    DONORS[name].append(donation)
+    DONORS[name].append(int(donation))
     return DONORS
 
 

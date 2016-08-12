@@ -33,3 +33,12 @@ def test_report_num_donations():
 def test_report_average():
     from mailroom import report_average
     assert 10 in report_average([20, 50], [2, 7])
+
+
+def test_create_report():
+    from mailroom import create_report
+    from mailroom import report_names
+    from mailroom import report_totals
+    from mailroom import report_num_donations
+    from mailroom import report_average
+    assert ['James', 60, 3, 20] in create_report(report_names({'James': []}), report_totals({'James': [40, 20]}), report_num_donations({'James': [1, 2, 3]}), report_average([40], [2]))

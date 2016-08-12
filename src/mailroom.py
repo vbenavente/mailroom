@@ -39,7 +39,7 @@ def handle_name(name, donation, DONORS):
 
 def handle_donation(name, donation, DONORS):
     DONORS[name].append(donation)
-    print(DONORS)
+    return DONORS
 
 
 def compose_email(name, donation):
@@ -47,14 +47,15 @@ def compose_email(name, donation):
           .format(name, donation))
     interface()
 
+
 def create_report():
     report_list = []
-    for i in range(0, len(report_names())):
+    for i in range(0, len(report_names(DONORS))):
         person = []
-        names = report_names()
-        totals = report_totals()
-        num_donations = report_num_donations()
-        average = report_average(report_totals(), report_num_donations())
+        names = report_names(DONORS)
+        totals = report_totals(DONORS)
+        num_donations = report_num_donations(DONORS)
+        average = report_average(report_totals(DONORS), report_num_donations(DONORS))
         person.extend((names[i], totals[i], num_donations[i], average[i]))
         report_list.append(person)
     report_list.sort(key=lambda x: x[1])
@@ -63,16 +64,14 @@ def create_report():
     interface()
 
 
-
-
-def report_names():
+def report_names(DONORS):
     list_names = []
     for key in DONORS:
         list_names.append(key)
     return list_names
 
 
-def report_totals():
+def report_totals(DONORS):
     total_donated = []
     for i in DONORS:
         totals = (sum(DONORS[i]))
@@ -80,7 +79,7 @@ def report_totals():
     return total_donated
 
 
-def report_num_donations():
+def report_num_donations(DONORS):
     num_donations = []
     for i in DONORS:
         num = len(DONORS[i])

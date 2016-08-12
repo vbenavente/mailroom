@@ -8,43 +8,39 @@ DONORS = {
 
 
 def interface():
-    response = input(u"Press 1 to send a thank you note\nPress 2 to create a \
-report ")
-    print(response)
-    if response == '1':
-        get_name()
-    elif response == '2':
-        create_report()
-    else:
+    response = input(u"Press 1 to send a thank you note\nPress 2 to create a report ")
+    while (response != '1') and (response != '2'):
         print(u"Please enter 1 or 2")
-        interface()
-
-
-def get_name(name):
-    name = input(u"Enter a donor\'s full name or to see a list of donors enter \
-the word 'list'")
-    name = name.lower()
-    if name == "list":
-        for key in DONORS:
-            print(key)
-        get_name()
-    else:
-        if name not in DONORS:
-            DONORS[name] = []
-            get_donation(name)
-        else:
-            get_donation(name)
-
-
-def get_donation(name):
-    donation = input(u"Enter the donation amount for {0}".format(name))
-    if donation.isnumeric():
-        DONORS[name].append(donation)
-        print(DONORS)
+        response = input(u"Press 1 to send a thank you note\nPress 2 to create a report ")
+    if response == '1':
+        name = input(u"Enter a donor\'s full name or enter the word 'list' to see a list of donors ")
+        name = name.lower()
+        while name == "list":
+            for key in DONORS:
+                print(key)
+            name = input(u"Enter a donor\'s full name or enter the word 'list' to see a list of donors ")
+            name = name.lower()
+        donation = input(u"Enter the donation amount for {0}".format(name))
+        while not donation.isnumeric():
+            print("Please enter the donation using numbers.")
+            donation = input(u"Enter the donation amount for {0}".format(name))
+        handle_name(name, donation, DONORS)
+        handle_donation(name, donation, DONORS)
         compose_email(name, donation)
     else:
-        print("Please enter the donation using numbers.")
-        get_donation(name)
+        create_report()
+
+
+def handle_name(name, donation, DONORS):
+    if name not in DONORS:
+        DONORS[name] = []
+    return DONORS
+
+
+def handle_donation(name, donation, DONORS):
+    DONORS[name].append(donation)
+    print(DONORS)
+
 
 
 def compose_email(name, donation):
@@ -53,4 +49,4 @@ def compose_email(name, donation):
     interface()
 
 
-interface()
+# interface()

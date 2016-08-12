@@ -42,7 +42,6 @@ def handle_donation(name, donation, DONORS):
     print(DONORS)
 
 
-
 def compose_email(name, donation):
     print("Dear {0}, Thank you for your generous donation of ${1}."
           .format(name, donation))

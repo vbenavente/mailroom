@@ -1,4 +1,14 @@
 # _*_ coding: utf-8 _*_
+import sys
+import traceback
+
+
+try:
+    input = raw_input
+except NameError:
+    pass
+
+
 DONORS = {
     'kevin': [23, 34, 1000, 2849],
     'bob': [234, 888, 9023],
@@ -8,9 +18,11 @@ DONORS = {
 
 
 def interface():
+    '''Prompts user for input'''
     response = input(u"Press 1 to send a thank you note\n"
-                     u"Press 2 to create a report")
-    while (response != '1') and (response != '2'):
+                     u"Press 2 to create a report\n"
+                     u"Type exit to leave the program")
+    while (response != '1') and (response != '2') and (response != 'exit'):
         print(u"Please enter 1 or 2")
         response = input(u"Press 1 to send a thank you note\n"
                          u"Press 2 to create a report ")
@@ -31,8 +43,11 @@ def interface():
         handle_name(name, donation, DONORS)
         handle_donation(name, donation, DONORS)
         compose_email(name, donation)
-    else:
+    elif response == '2':
         create_report()
+    else:
+        traceback.print_exc(file=sys.stdout)
+        sys.exit(0)
 
 
 def handle_name(name, donation, DONORS):
@@ -96,5 +111,12 @@ def report_average(total_donated, num_donations):
     return report_average
 
 
-# if __name__ == '__main__':
-#     interface()
+def main():
+    '''Run from the command line interface'''
+    print('''
+          yada yada yada
+          ''')
+    interface()
+
+if __name__ == '__main__':
+    main()
